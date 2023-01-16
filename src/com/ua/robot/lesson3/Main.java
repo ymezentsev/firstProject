@@ -1,10 +1,12 @@
 package com.ua.robot.lesson3;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-
-
+        int firstNumber = 20;
+        int secondNumber = 4;
+        System.out.println(firstNumber + secondNumber);
+        System.out.println(firstNumber - secondNumber);
+        System.out.println(firstNumber / secondNumber);
+        System.out.println(firstNumber * secondNumber);
     }
 }
