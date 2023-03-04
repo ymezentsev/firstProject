@@ -1,10 +1,10 @@
-package com.ua.robot.lesson13.repository;
+package com.ua.robot.workStudents.repository;
 
-import com.ua.robot.lesson13.domain.Student;
+import com.ua.robot.workStudents.domain.Student;
 
 import java.util.Random;
 
-public class StudentMemoryRepository {
+public class StudentMemoryRepository implements StudentRepository {
     public static final int SIZE = 10;
     private Student[] students = new Student[SIZE];
 
@@ -12,17 +12,24 @@ public class StudentMemoryRepository {
         fillStudentsWithRandomStudent();
     }
 
-    public Student[] findAllStudents(){
+    public Student[] findAll() {
         return students;
     }
 
-    private void addStudent(Student student) {
+    public void save(Student student) {
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
                 student.setId(i);
                 students[i] = student;
                 break;
             }
+        }
+    }
+
+    private void fillStudentsWithRandomStudent() {
+        for (int i = 0; i < SIZE; i++) {
+            Student student = getRandomStudent();
+            save(student);
         }
     }
 
@@ -34,9 +41,14 @@ public class StudentMemoryRepository {
 
         String firstName = generateRandomName();
         String lastName = generateRandomName();
-        String  group = Integer.valueOf(random.nextInt(MIN_GROUP_VALUE, MAX_GROUP_VALUE)).toString();
-        double avgMark = (double) (random.nextInt(200, 500)) / 100;
-        return new Student(0, firstName, lastName, group, avgMark);
+        String group = Integer.valueOf(random.nextInt(MIN_GROUP_VALUE, MAX_GROUP_VALUE)).toString();
+
+        int[] marks = new int[Student.NUMBER_OF_SUBJECTS];
+        for (int i =0 ; i<marks.length; i++){
+            marks[i] = random.nextInt(30, 101);
+        }
+
+        return new Student(0, firstName, lastName, group, marks);
     }
 
     private String generateRandomName() {
@@ -54,10 +66,5 @@ public class StudentMemoryRepository {
         return name.toString();
     }
 
-    private void fillStudentsWithRandomStudent() {
-        for (int i = 0; i < SIZE; i++) {
-            Student student = getRandomStudent();
-            addStudent(student);
-        }
-    }
+
 }

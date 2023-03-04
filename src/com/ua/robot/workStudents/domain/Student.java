@@ -1,21 +1,31 @@
-package com.ua.robot.lesson13.domain;
+package com.ua.robot.workStudents.domain;
+
+import java.util.Arrays;
 
 public class Student {
+    public static final int NUMBER_OF_SUBJECTS = 5;
     private int id;
     private String firstName;
     private String lastName;
     private String group;
-    private double avgMark;
+    private int[] marks = new int[NUMBER_OF_SUBJECTS];
 
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, String group, double avgMark) {
+    public Student(int id, String firstName, String lastName, String group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
-        this.avgMark = avgMark;
+    }
+
+    public Student(int id, String firstName, String lastName, String group, int[] marks) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.group = group;
+        this.marks = marks;
     }
 
     public int getId() {
@@ -50,12 +60,12 @@ public class Student {
         this.group = group;
     }
 
-    public double getAvgMark() {
-        return avgMark;
+    public int[] getMarks() {
+        return marks;
     }
 
-    public void setAvgMark(double avgMark) {
-        this.avgMark = avgMark;
+    public void setMarks(int[] marks) {
+        this.marks = marks;
     }
 
     @Override
@@ -65,7 +75,7 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", group='" + group + '\'' +
-                ", avgMark=" + avgMark +
+                ", marks=" + Arrays.toString(marks) +
                 '}';
     }
 }
